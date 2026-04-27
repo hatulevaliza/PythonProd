@@ -28,6 +28,11 @@
 <div class="products">
     {% for product in products %}
     <div class="card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: auto; max-height: 150px; object-fit: cover;">
+        {% else %}
+            <div style="width: 100%; height: 150px; background: #eee; display: flex; align-items: center; justify-content: center;">Нет фото</div>
+        {% endif %}
         <h3>{{ product.name }}</h3>
         <p>{{ product.category.name }}</p>
         <p class="price">{{ product.price }} руб</p>
