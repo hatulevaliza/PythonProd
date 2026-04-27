@@ -1,0 +1,36 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h2>Оформление заказа</h2>
+
+<table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Сумма</th>
+    </tr>
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.price }} руб</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.total_price }} руб</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p style="font-size: 20px;"><strong>Итого: {{ total }} руб</strong></p>
+
+<h3>Контактные данные</h3>
+<form method="post">
+    {% csrf_token %}
+    <label>Телефон:</label><br>
+    <input type="text" name="phone" required><br><br>
+    
+    <label>Адрес доставки:</label><br>
+    <textarea name="address" rows="3" cols="40" required></textarea><br><br>
+    
+    <button type="submit">Подтвердить заказ</button>
+</form>
+{% endblock %}

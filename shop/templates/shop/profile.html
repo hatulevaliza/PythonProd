@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h2>Мои заказы</h2>
+
+{% if orders %}
+    {% for order in orders %}
+    <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+        <p><strong>Заказ №{{ order.id }}</strong> от {{ order.created_at|date:"d.m.Y" }}</p>
+        <p>Телефон: {{ order.phone }}</p>
+        <p>Адрес: {{ order.address }}</p>
+        <p>Сумма: {{ order.total_price }} руб</p>
+        
+        <h4>Товары:</h4>
+        <ul>
+            {% for item in order.items.all %}
+            <li>{{ item.product.name }} x {{ item.quantity }} = {{ item.price|floatformat:0 }} руб</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>У вас пока нет заказов</p>
+    <a href="/">Перейти к покупкам</a>
+{% endif %}
+
+{% endblock %}

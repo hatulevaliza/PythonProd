@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SweetHandmade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: #333;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .filters {
+            background: #eee;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .products {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+        button {
+            background: orange;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="/">SweetHandmade</a>
+        <div>
+            <a href="/">Каталог</a>
+            <a href="/cart/">Корзина</a>
+            {% if user.is_authenticated %}
+                <a href="/profile/">Личный кабинет</a>
+                <form method="post" action="/logout/" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">Выход</button>
+                </form>
+            {% else %}
+                <a href="/login/">Вход</a>
+                <a href="/register/">Регистрация</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
